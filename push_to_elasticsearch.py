@@ -52,7 +52,7 @@ print(current_dt_unix_min)
 print("##########")
 
 # Get Telemetry from Past Interval
-httpGetUrl = 'http://'+THINGSBOARD_HOST+'/api/plugins/telemetry/DEVICE/'+THINGSBOARD_DEVICEID+'/values/timeseries?keys='+THINGSBOARD_KEYS+'&startTs='+current_dt_unix_min+'&endTs='+current_dt_unix+'&interval=60000&limit=100&agg=AVG'
+httpGetUrl = 'http://'+THINGSBOARD_HOST+'/api/plugins/telemetry/DEVICE/'+THINGSBOARD_DEVICEID+'/values/timeseries?keys='+THINGSBOARD_KEYS+'&startTs='+str(current_dt_unix_min)+'&endTs='+str(current_dt_unix)+'&interval=60000&limit=100&agg=AVG'
 httpGetHeaders = {"Content-Type": "application/json", "X-Authorization": "Bearer "+jwt_token}
 r3 = requests.get(httpGetUrl, headers=httpGetHeaders)
 print("Status Code: " + str(r3.status_code))
