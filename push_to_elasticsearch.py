@@ -4,6 +4,9 @@ import sys
 import json
 import requests
 
+
+with open('ThingsBoard-config.json', 'r') as f:
+    config = json.load(f)
 # Load config from JSON file
 THINGSBOARD_HOST = config['THINGSBOARD_HOST']
 THINGSBOARD_USERNAME = config['THINGSBOARD_USERNAME']
