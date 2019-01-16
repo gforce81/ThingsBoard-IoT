@@ -3,5 +3,7 @@
 	"ACCESS_TOKEN": "VrafmERm8V4uOkadcQd4",
 	"INTERVAL": 60,
 	"THINGSBOARD_USERNAME": "tenant@thingsboard.org",
-	"THINGSBOARD_PASSWORD": "4metogetIN"
+	"THINGSBOARD_PASSWORD": "4metogetIN",
+	"THINGSBOARD_DEVICEID": "4b8b1c90-19af-11e9-b508-454a71fdd1fd",
+	"THINGSBOARD_KEYS": "humidity,temperature"
 }

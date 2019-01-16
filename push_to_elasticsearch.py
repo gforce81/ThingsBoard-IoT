@@ -18,8 +18,21 @@ httpPostBody = {"username": THINGSBOARD_USERNAME, "password": THINGSBOARD_PASSWO
 httpPostHeathers = {"Content-Type": "application/json"}
 r = requests.post(httpPostUrl, data=json.dumps(httpPostBody), headers=httpPostHeathers)
 print("Status Code: " + str(r.status_code))
-jwt_data = json.loads(r.text)
+jwt_data = r.json()
 print("JWT Token:")
 print("##########")
 print(jwt_data)
+print("##########")
+jwt_data = json.loads(r.text)
+jwt_token = jwt_data['token']
+
+# Get the latest telemtry
+httpGetUrl = 'http://'+THINGSBOARD_HOST+'/api/plugins/telemetry/DEVICE/'+THINGSBOARD_DEVICEID+'/values/timeseries?keys='+THINGSBOARD_KEYS
+httpGetHeaders = {"Content-Type": "application/json", "X-Authorization": "Bearer "+jwt_token}
+r2 = requests.get(httpGetUrl, headers=httpGetHeaders)
+print("Status Code: " + str(r2.status_code))
+telemetry_data = r2.json()
+print("Telemetry Data:")
+print("##########")
+print(telemetry_data)
 print("##########")
