@@ -3,6 +3,7 @@ import time
 import sys
 import json
 import requests
+import calendar
 
 
 with open('ThingsBoard-config.json', 'r') as f:
@@ -38,3 +39,8 @@ print("Telemetry Data:")
 print("##########")
 print(telemetry_data)
 print("##########")
+
+# Get time
+current_dt = datetime.datetime.utcnow()
+current_dt_unix = calendar.timegm(current_dt.utctimetuple())
+print(current_dt_unix)
