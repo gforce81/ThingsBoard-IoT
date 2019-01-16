@@ -30,7 +30,10 @@ try:
         humidity,temperature = dht.read_retry(dht.DHT11, 4)
         humidity = round(humidity, 2)
         temperature = round(temperature, 2)
-        print(u"Temperature: {:g}\u00b0C, Humidity: {:g}%".format(temperature, humidity))
+        temperature = temperature*9
+        temperature = temperature/5
+        temperature = temperature + 32
+        print(u"Temperature: {:g}\u00b0F, Humidity: {:g}%".format(temperature, humidity))
         sensor_data['temperature'] = temperature
         sensor_data['humidity'] = humidity
 
