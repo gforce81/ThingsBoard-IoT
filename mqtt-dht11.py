@@ -5,11 +5,19 @@ import Adafruit_DHT as dht
 import paho.mqtt.client as mqtt
 import json
 
-THINGSBOARD_HOST = '34.199.135.198'
-ACCESS_TOKEN = 'VrafmERm8V4uOkadcQd4'
+with open('ThingsBoard-config.json', 'r') as f:
+    config = json.load(f)
+
+# Load config from JSON file
+THINGSBOARD_HOST = config['THINGSBOARD_HOST']
+ACCESS_TOKEN = config['ACCESS_TOKEN']
+INTERVAL = config['INTERVAL']
+
+# THINGSBOARD_HOST = '34.199.135.198'
+# ACCESS_TOKEN = 'VrafmERm8V4uOkadcQd4'
 
 # Data capture and upload interval in seconds. Less interval will eventually hang the DHT22.
-INTERVAL=60
+# INTERVAL=60
 
 sensor_data = {'temperature': 0, 'humidity': 0}
 
