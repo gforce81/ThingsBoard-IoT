@@ -17,5 +17,5 @@ httpPostUrl = 'http://'+THINGSBOARD_HOST+'/api/auth/login?Content-Type=applicati
 httpPostBody = {"username": THINGSBOARD_USERNAME, "password": THINGSBOARD_PASSWORD}
 httpPostHeathers = {"Content-Type": "application/json"}
 r = requests.post(httpPostUrl, data=json.dumps(httpPostBody), headers=httpPostHeathers)
-print("Status Code: " + r.status_code)
+print("Status Code: " + str(r.status_code))
 print("JWT Token: " + r.json)
