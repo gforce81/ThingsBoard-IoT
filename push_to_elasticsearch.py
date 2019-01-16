@@ -11,6 +11,8 @@ with open('ThingsBoard-config.json', 'r') as f:
 THINGSBOARD_HOST = config['THINGSBOARD_HOST']
 THINGSBOARD_USERNAME = config['THINGSBOARD_USERNAME']
 THINGSBOARD_PASSWORD = config['THINGSBOARD_PASSWORD']
+THINGSBOARD_DEVICEID = config['THINGSBOARD_DEVICEID']
+THINGSBOARD_KEYS = config['THINGSBOARD_KEYS']
 
 # Get the JWT token
 httpPostUrl = 'http://'+THINGSBOARD_HOST+'/api/auth/login?Content-Type=application/json&Accept=application/json'
