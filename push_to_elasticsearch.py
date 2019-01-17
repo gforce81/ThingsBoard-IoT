@@ -98,7 +98,7 @@ sensorLocation = config_sensor['sensorLocation']
 
 # encode user/password base64
 credentials_string = ES_USER+":"+ES_PASSWORD
-credentials = base64.base64encode(credentials_string)
+credentials = base64.b64encode(credentials_string)
 
 # Iterate and push each telemetry node to ES
 for index, item in enumerate(number_telemetry['temperature']):
