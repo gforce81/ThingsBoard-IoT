@@ -94,7 +94,7 @@ esToken_data = json.loads(r4.text)
 esToken = esToken_data['access_token']
 
 # Iterate and push each telemetry node to ES
-for x in range (0, number_telemetry)
+for x in range (0, number_telemetry):
 	telemetry_temperature = telemetry_data['temperature'][x]['value']
 	telemetry_temperature_timestamp = telemetry_data['temperature'][x]['ts']
 	print("**********")

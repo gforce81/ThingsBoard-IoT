@@ -1,4 +1,4 @@
-PUT ThingsBoard
+PUT thingsboard
 {
     "settings" : {
         "number_of_shards" : 5,
