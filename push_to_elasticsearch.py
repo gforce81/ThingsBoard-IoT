@@ -63,7 +63,7 @@ print(telemetry_data)
 print("##########")
 telemetry_data = json.loads(r3.text)
 # Get the number of telemetry data
-number_telemetry = json.load(r3.json)
+number_telemetry = r3.json()
 
 # Load ES Configuration and Get ES Token
 # Load config from JSON file
