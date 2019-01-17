@@ -122,3 +122,4 @@ for index, item in enumerate(number_telemetry['temperature']):
 
 	r5 = requests.post(es_httpIndexUrl, data=json.dumps(es_httpIndexBody), headers=es_httpIndexHeaders)
 	print("Status Code:" + str(r5.status_code))
+	print("Message: " + r5.json())
