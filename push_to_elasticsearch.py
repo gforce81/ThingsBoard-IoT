@@ -83,7 +83,7 @@ es_httpTokenUrl = 'https://'+ES_HOST+'/_xpack/security/oauth2/token'
 es_httpTokenBody = {"grant_type" : "password", "username" : ES_USER, "password" : ES_PASSWORD}
 es_httpTokenHeaders = {"Content-Type": "application/json"}
 
-r4 = requests.get(es_httpTokenUrl, data=json.dumps(es_httpTokenBody), headers=es_httpTokenHeaders)
+r4 = requests.post(es_httpTokenUrl, data=json.dumps(es_httpTokenBody), headers=es_httpTokenHeaders)
 print("Status Code: " + str(r4.status_code))
 esToken_data = r4.json()
 print("ES Token Data:")
