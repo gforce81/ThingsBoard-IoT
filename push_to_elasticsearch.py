@@ -63,7 +63,7 @@ print(telemetry_data)
 print("##########")
 telemetry_data = json.loads(r3.text)
 # Get the number of telemetry data
-number_telemetry = telemetry_data['temperature'].length
+number_telemetry = json.load(r3.json)
 
 # Load ES Configuration and Get ES Token
 # Load config from JSON file
@@ -94,13 +94,13 @@ esToken_data = json.loads(r4.text)
 esToken = esToken_data['access_token']
 
 # Iterate and push each telemetry node to ES
-for x in range (0, number_telemetry):
-	telemetry_temperature = telemetry_data['temperature'][x]['value']
-	telemetry_temperature_timestamp = telemetry_data['temperature'][x]['ts']
+for index, item in enumerate(number_telemetry['temperature']:
+	telemetry_temperature = telemetry_data['temperature'][index]['value']
+	telemetry_temperature_timestamp = telemetry_data['temperature'][index]['ts']
 	print("**********")
 	print("Temperature to push: " + telemetry_temperature)
-	telemetry_humidity = telemetry_data['humidity'][x]['value']
-	telemetry_humidity_timestamp = telemetry_data['humidity'][x]['ts']
+	telemetry_humidity = telemetry_data['humidity'][index]['value']
+	telemetry_humidity_timestamp = telemetry_data['humidity'][index]['ts']
 	print("Humidity to push: "+ telemetry_humidity)
 	print("**********")
 
