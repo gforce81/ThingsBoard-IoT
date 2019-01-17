@@ -5,6 +5,7 @@ import json
 import requests
 import calendar
 import datetime
+import base64
 
 
 with open('ThingsBoard-config.json', 'r') as f:
@@ -74,24 +75,30 @@ ES_USER = config_es['ES_USER']
 ES_PASSWORD = config_es['ES_PASSWORD']
 ES_INDEX = config_es['ES_INDEX']
 ES_TYPE = config_es['ES_TYPE']
+
 with open('Sensor-config.json', 'r') as g:
 	config_sensor = json.load(g)
 sensorID = config_sensor['sensorID']
 sensorLocation = config_sensor['sensorLocation']
-# GET ES Token
-es_httpTokenUrl = 'https://'+ES_HOST+'/_xpack/security/oauth2/token'
-es_httpTokenBody = {"grant_type" : "password", "username" : ES_USER, "password" : ES_PASSWORD}
-es_httpTokenHeaders = {"Content-Type": "application/json"}
 
-r4 = requests.post(es_httpTokenUrl, data=json.dumps(es_httpTokenBody), headers=es_httpTokenHeaders)
-print("Status Code: " + str(r4.status_code))
-esToken_data = r4.json()
-print("ES Token Data:")
-print("##########")
-print(esToken_data)
-print("##########")
-esToken_data = json.loads(r4.text)
-esToken = esToken_data['access_token']
+# GET ES Token
+# es_httpTokenUrl = 'https://'+ES_HOST+'/_xpack/security/oauth2/token'
+# es_httpTokenBody = {"grant_type" : "password", "username" : ES_USER, "password" : ES_PASSWORD}
+# es_httpTokenHeaders = {"Content-Type": "application/json"}
+
+# r4 = requests.post(es_httpTokenUrl, data=json.dumps(es_httpTokenBody), headers=es_httpTokenHeaders)
+# print("Status Code: " + str(r4.status_code))
+# esToken_data = r4.json()
+# print("ES Token Data:")
+# print("##########")
+# print(esToken_data)
+# print("##########")
+# esToken_data = json.loads(r4.text)
+# esToken = esToken_data['access_token']
+
+# encode user/password base64
+credentials_string = ES_USER+":"+ES_PASSWORD
+credentials = base64.base64encode(credentials_string)
 
 # Iterate and push each telemetry node to ES
 for index, item in enumerate(number_telemetry['temperature']):
@@ -111,7 +118,7 @@ for index, item in enumerate(number_telemetry['temperature']):
 	# Index Content
 	es_httpIndexUrl = 'https://'+ES_HOST+'/'+ES_INDEX+'/'+ES_TYPE
 	es_httpIndexBody = {"sensorID": sensorID, "sensorLocation": sensorLocation, "temperature": telemetry_temperature, "humidity": telemetry_humidity, "temperatureTimestamp": telemetry_temperature_timestamp, "humidityTimestamp": telemetry_humidity_timestamp}
-	es_httpIndexHeaders = {"Content-Type": "application/json", "Authorization": "Bearer "+esToken}
+	es_httpIndexHeaders = {"Content-Type": "application/json", "Authorization": "Basic "+credentials}
 
 	r5 = requests.put(es_httpIndexUrl, data=json.dumps(es_httpIndexBody), headers=es_httpIndexHeaders)
 	print("Status Code:" + str(r5.status_code))
