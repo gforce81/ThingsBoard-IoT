@@ -1,0 +1,3 @@
+export EDITOR=nano; crontab -e
+
+*/2 * * * * python ~/ThingsBoard-IoT/push_to_elasticsearch.py

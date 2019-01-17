@@ -1,0 +1,7 @@
+{
+	"ES_HOST": "",
+	"ES_USER": "",
+	"ES_PASSWORD": "",
+	"ES_INDEX": "ThingsBoard",
+	"ES_TYPE": "telemetry"
+}

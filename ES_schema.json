@@ -1,0 +1,19 @@
+PUT ThingsBoard
+{
+    "settings" : {
+        "number_of_shards" : 5,
+        "number_of_replicas" : 1
+    },
+    "mappings" : {
+        "telemetry" : {
+            "properties" : {
+                "sensorID" : { "type" : "keyword" },
+                "sensorLocation" : { "type" : "keyword" },
+                "temperature" : { "type" : "float" },
+                "temperatureTimestamp": { "type" : "date" },
+                "humidity": { "type" : "float" },
+                "humidityTimestamp": { "type" : "date" }
+            }
+        }
+    }
+}

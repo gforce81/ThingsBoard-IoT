@@ -61,3 +61,57 @@ print("Telemetry Data:")
 print("##########")
 print(telemetry_data)
 print("##########")
+telemetry_data = json.loads(r3.text)
+# Get the number of telemetry data
+number_telemetry = telemetry_data['temperature'].length
+
+# Load ES Configuration and Get ES Token
+# Load config from JSON file
+with open('ES-config.json', 'r') as h:
+    config_es = json.load(h)
+ES_HOST = config_es['ES_HOST']
+ES_USER = config_es['ES_USER']
+ES_PASSWORD = config_es['ES_PASSWORD']
+ES_INDEX = config_es['ES_INDEX']
+ES_TYPE = config_es['ES_TYPE']
+with open('Sensor-config.json', 'r') as g:
+	config_sensor = json.load(g)
+sensorID = config_sensor['sensorID']
+sensorLocation = config_sensor['sensorLocation']
+# GET ES Token
+es_httpTokenUrl = 'https://'+ES_HOST+'/_xpack/security/oauth2/token'
+es_httpTokenBody = {"grant_type" : "password", "username" : ES_USER, "password" : ES_PASSWORD}
+es_httpTokenHeaders = {"Content-Type": "application/json"}
+
+r4 = requests.get(es_httpTokenUrl, data=json.dumps(es_httpTokenBody), headers=es_httpTokenHeaders)
+print("Status Code: " + str(r4.status_code))
+esToken_data = r4.json()
+print("ES Token Data:")
+print("##########")
+print(esToken_data)
+print("##########")
+esToken_data = json.loads(r4.text)
+esToken = esToken_data['access_token']
+
+# Iterate and push each telemetry node to ES
+for x in range (0, number_telemetry)
+	telemetry_temperature = telemetry_data['temperature'][x]['value']
+	telemetry_temperature_timestamp = telemetry_data['temperature'][x]['ts']
+	print("**********")
+	print("Temperature to push: " + telemetry_temperature)
+	telemetry_humidity = telemetry_data['humidity'][x]['value']
+	telemetry_humidity_timestamp = telemetry_data['humidity'][x]['ts']
+	print("Humidity to push: "+ telemetry_humidity)
+	print("**********")
+
+	# Push to Elasticsearch
+	print("**********")
+	print("Pushing to Elasticsearch")
+	print("**********")
+	# Index Content
+	es_httpIndexUrl = 'https://'+ES_HOST+'/'+ES_INDEX+'/'+ES_TYPE
+	es_httpIndexBody = {"sensorID": sensorID, "sensorLocation": sensorLocation, "temperature": telemetry_temperature, "humidity": telemetry_humidity, "temperatureTimestamp": telemetry_temperature_timestamp, "humidityTimestamp": telemetry_humidity_timestamp}
+	es_httpIndexHeaders = {"Content-Type": "application/json", "Authorization": "Bearer "+esToken}
+
+	r5 = requests.put(es_httpIndexUrl, data=json.dumps(es_httpIndexBody), headers=es_httpIndexHeaders)
+	print("Status Code:" + str(r5.status_code))
