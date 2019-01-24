@@ -39,13 +39,13 @@ This (sample) project does 2 things:
   sudo pip install paho-mqtt
  ```
 * update all the **-config.json** files to match your environments
-* clone the Adafruit repository for the DHT11 https://github.com/adafruit/DHT-sensor-library
+* clone the Adafruit repository for the DHT11
 ```
   git clone https://github.com/adafruit/Adafruit_Python_DHT.git
   cd Adafruit_Python_DHT
   sudo python setup.py install
  ```
- * Add the commands included in the **cron_jab.tx** file to your Crontab
+ * Add the commands included in the **cron_job.tx** file to your Crontab
  * Reload Cron: 
  ```
   sudo service cron reload
