@@ -1,7 +1,7 @@
 {
-	"ES_HOST": "dd905766d8a74b5ea008277e8218c1e7.us-east-1.aws.found.io:9243",
-	"ES_USER": "elastic",
-	"ES_PASSWORD": "eFud1IvTjprAhpztxqenTjUd",
+	"ES_HOST": "YOUR_ES_SERVER_WITHOUT_HTTP",
+	"ES_USER": "YOUR_USERNAME",
+	"ES_PASSWORD": "YOUR_PASSWORD",
 	"ES_INDEX": "thingsboard",
 	"ES_TYPE": "telemetry"
 }
